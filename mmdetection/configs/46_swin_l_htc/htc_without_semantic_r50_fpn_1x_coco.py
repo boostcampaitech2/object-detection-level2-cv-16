@@ -1,6 +1,6 @@
 _base_ = [
     './coco_instance.py',
-    './schedules/schedule_1x.py', 
+    './schedule_1x.py',
     './default_runtime.py'
 ]
 # model settings
