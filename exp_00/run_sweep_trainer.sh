@@ -28,10 +28,11 @@ run_trainer_with_config()
 
 }
 
-if [ ! -d ./work-dir ]
+if [ ! -d ./wandb ]
 then
     echo "_________________________________________"
-    echo " Please check wandb state. you should run `wandb init`"
+    echo " Please check wandb state. you should run"
+    echo " [ wandb init ] on your experiment directory."
 fi
     
     
