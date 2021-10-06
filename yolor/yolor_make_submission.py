@@ -2,10 +2,10 @@ import os
 import copy
 import pandas as pd
 
-DETECT_TXT_DIR = 'yolor/inference/yolor_p6'
+DETECT_TXT_DIR = 'yolor/inference/yolor_p6_best_ap50'
 IMAGE_DIR = 'yolor/trash_data/images/test'
 
-whole = os.listdir(IMAGE_DIR)
+whole = sorted(os.listdir(IMAGE_DIR))
 label_name = [x[:-3]+'txt' for x in whole]
 
 file_names = []
