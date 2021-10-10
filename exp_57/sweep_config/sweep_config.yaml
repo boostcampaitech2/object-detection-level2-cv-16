@@ -1,0 +1,36 @@
+method: bayes
+metric:
+  goal: maximize
+  name: val/bbox_mAP
+parameters:
+  model_name:
+    distribution: constant
+    value:
+      htc_cbv2_swin_base_patch4_window7_mstrain_400-1400_giou_4conv1f_adamw_20e_coco
+  samples_per_gpu:
+    distribution: int_uniform
+    min: 2
+    max: 4
+  lr_default: #5e-05
+    distribution: uniform
+    max: 5e-04
+    min: 1e-05
+  max_epochs:
+    distribution: constant
+    value: 20
+  lr_step_1:
+    distribution: int_uniform
+    min: 1
+    max: 17
+  lr_step_2:
+    distribution: int_uniform
+    min: 18
+    max: 19
+  max_keep_ckpts:
+    value: -1 # never
+  data_version:
+    value: debug
+  seed:
+    value: 16
+  
+program: exp_train.py

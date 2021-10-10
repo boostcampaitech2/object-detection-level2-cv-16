@@ -1,0 +1,5 @@
+[default]
+entity = passion-ate
+project = cbnetv2
+base_url = https://api.wandb.ai
+
