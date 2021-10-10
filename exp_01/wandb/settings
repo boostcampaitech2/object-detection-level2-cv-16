@@ -1,0 +1,5 @@
+[default]
+entity = sang-hyun
+project = exp_01
+base_url = https://api.wandb.ai
+
