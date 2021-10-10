@@ -1,0 +1,61 @@
+method: bayes
+metric:
+  goal: maximize
+  name: val/bbox_mAP
+parameters:
+  model_name:
+    distribution: constant
+    value: swin_t_squeeze
+  samples_per_gpu:
+    distribution: constant
+    value: 2
+  roi_feat_size:
+    distribution: int_uniform
+    min: 5
+    max: 15
+  class_loss_weight:
+    distribution: uniform
+    max: 1.5
+    min: 0.00001
+  bbox_loss_weight:
+    distribution: uniform
+    max: 1.5
+    min: 0.00001
+  rpn_iou_threshold:
+    distribution: uniform
+    max: 0.99
+    min: 0.00001
+  lr_default: # 0.002 SGD
+    distribution: uniform
+    max: 0.02
+    min: 0.0002
+  lr_step_1: # 27
+    distribution: int_uniform
+    min: 1
+    max: 31
+  lr_step_2: # 33
+    distribution: int_uniform
+    min: 32
+    max: 35
+  weight_decay: # 0.0001
+    distribution: uniform
+    min: 0.00001
+    max: 0.01
+  max_norm: # 35
+    distribution: uniform
+    min: 1
+    max: 40
+  max_epochs:
+    distribution: constant
+    value: 36
+  multi_scale:
+    distribution: categorical
+    values: [multi, single]
+  data_version:
+    value: v2
+  seed:
+    value: 16
+  max_keep_ckpts:
+    value: -1 # never
+  
+program: exp_train.py

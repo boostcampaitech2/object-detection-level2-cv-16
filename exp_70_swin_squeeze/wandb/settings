@@ -1,0 +1,5 @@
+[default]
+entity = passion-ate
+project = swin-55-squeeze
+base_url = https://api.wandb.ai
+
