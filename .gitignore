@@ -4,6 +4,7 @@ mmdetection/docker
 mmdetection/demo
 dataset/test/*
 dataset/train/*
+dataset/result/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
