@@ -1,30 +1,16 @@
-from pycocotools.coco import COCO
-from pycocotools.cocoeval import COCOeval
-import numpy as np
-import cv2
 import os
-
-import albumentations as A
-from albumentations.pytorch.transforms import ToTensorV2
-
-import torch
-
-import torchvision
-from torchvision import transforms
-
-from torch.utils.data import DataLoader, Dataset
-import pandas as pd
-from tqdm import tqdm
-from PIL import Image
 import shutil
 
-class CustomDataset(Dataset):
-    '''
-      data_dir: 
-      transforms: data transform (resize, crop, Totensor, etc,,,)
-    '''
+from PIL import Image
+import cv2
+import numpy as np
+import torch
+from torch.utils.data import Dataset
+from pycocotools.coco import COCO
 
-    def __init__(self, annotation, data_dir, mode, transforms=None):
+class CustomDataset(Dataset):
+
+    def __init__(self, annotation, data_dir, mode):
         super().__init__()
         self.data_dir = data_dir
         # load coco annotation  (coco API)
@@ -34,7 +20,6 @@ class CustomDataset(Dataset):
             "categories": self.coco.dataset["categories"].copy(),
             "annotations": None
         }
-        self.transforms = transforms
         self.mode = mode
 
     def __getitem__(self, index: int):
@@ -59,7 +44,7 @@ class CustomDataset(Dataset):
             boxes /= 1024
 
             target = {'boxes': boxes, 'labels': labels, 'image_id': torch.tensor([index])}
-            
+
             data = []
             for i,j in zip(target['boxes'], target['labels']):
                 x,y,w,h = i
@@ -68,51 +53,34 @@ class CustomDataset(Dataset):
             filename = image_info['file_name'][:-4].replace('/', '_')
             data = np.array(data)
 
-            np.savetxt(os.path.join('./yolor/trash_data/labels/' + f'{self.mode}/{filename}.txt'),
+            np.savetxt(os.path.join('./yolor_paper/yolor/trash_data_3/labels/' + f'{self.mode}/{filename}.txt'),
                           data,
                           fmt = ['%d', '%f', '%f', '%f', '%f'])
 
             new_img = Image.fromarray(image)
-            new_img.save('./yolor/trash_data/images/' + f'{self.mode}/{filename}.jpg')
-            
-#             return image, data, filename
+            new_img.save('./yolor_paper/yolor/trash_data_3/images/' + f'{self.mode}/{filename}.jpg')
             
         else:
             filename = image_info['file_name'].replace('/', '_')
             shutil.copyfile(os.path.join(self.data_dir, image_info['file_name']),
-                            os.path.join('./yolor/trash_data/images/test', filename))
+                            os.path.join('./yolor_paper/yolor/trash_data_3/images/test', filename))
     
     def __len__(self):
         return len(self.coco.getImgIds())
-                     
-def get_train_transform():
-    return A.Compose([
-        A.RandomGamma((100,150), p = 0.6),
-        A.CLAHE(7,p=0.6),
-        A.RandomBrightnessContrast(brightness_limit=(0.0,0.15), contrast_limit=(0.1,0.3), p = 0.6)], 
-        bbox_params={'format': 'yolo','label_fields': ['labels']})
-
-
-def get_valid_transform():
-    return A.Compose([
-        A.RandomGamma((100,150), p = 0.6),
-        A.CLAHE(7,p=0.6),
-        A.RandomBrightnessContrast(brightness_limit=(0.0,0.15), contrast_limit=(0.1,0.3), p = 0.6)],
-        bbox_params={'format': 'yolo','label_fields': ['labels']})
     
 if __name__ == '__main__':
     data_dir = './dataset'
-    #annotation = data_dir + '/train.json'
+    annotation = data_dir + '/train_v3_f3.json'
 
-   # temp = CustomDataset(annotation, data_dir, 'train')
+    temp = CustomDataset(annotation, data_dir, 'train')
     
-    #annotation = data_dir + '/split_valid_v2.json'
+    # annotation = data_dir + '/valid_v3_f3.json'
 
-    #temp = CustomDataset(annotation, data_dir, 'valid')
+    # temp = CustomDataset(annotation, data_dir, 'valid')
 
-    annotation = data_dir + '/test.json'
+    #annotation = data_dir + '/test.json'
 
-    temp = CustomDataset(annotation, data_dir, 'test')
+    #temp = CustomDataset(annotation, data_dir, 'test')
     for i in range(len(temp)):
         print(temp[i])
     
