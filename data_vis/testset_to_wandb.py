@@ -36,7 +36,7 @@ print(test_json.keys())
 te_dict = edict(test_json)
 
 # In[5]:
-lb_score = ['mAP_0.647','mAP_0.646','mAP_0.644','mAP_0.394','mAP_0.373','mAP_0.372'][args.int]
+lb_score = ['mAP_0.647','mAP_0.646','mAP_0.644','mAP_0.551','mAP_0.394','mAP_0.373','mAP_0.372'][args.int]
 df = pd.read_csv(f"../dataset/result/{lb_score}.csv")
 
 
@@ -87,7 +87,7 @@ for im in te_dict.images[:30]:
                 type="rect",
                 xref="x", yref="y",
                 x0=x0, y0=y0,
-                x1=x0+w, y1=y0+h,
+                x1=w, y1=h,
                 line=dict(color=palette[category_id], width=4),
                 opacity=confidence,
             )
@@ -121,6 +121,6 @@ for im in te_dict.images[:30]:
         ]
     )
         
-    wandb.log({"bbox result": wandb.data_types.Plotly(fig)})
+    wandb.log({"bbox result": wandb.data_types.Plotly(fig), "number_of_boxes": len(bboxes_all)})
 
 
