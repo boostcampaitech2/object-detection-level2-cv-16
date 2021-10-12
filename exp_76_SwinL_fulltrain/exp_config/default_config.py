@@ -1,7 +1,9 @@
-roi_feat_size = 5
-class_loss_weight = 1.3823502962830962
-bbox_loss_weight = 0.6845329161726197
-rpn_iou_threshold = 0.041106683797837176
+roi_feat_size = 7
+class_loss_weight = 1.0
+bbox_loss_weight = 1.0
+rpn_iou_threshold = 0.7
+
+
 model = dict(
     type='CascadeRCNN',
     backbone=dict(
@@ -22,9 +24,8 @@ model = dict(
         convert_weights=True,
         init_cfg=dict(
             type='Pretrained',
-            checkpoint=
-            'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_large_patch4_window12_384_22k.pth'
-        )),
+            checkpoint='https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_large_patch4_window12_384_22k.pth'
+            )),
     neck=dict(
         type='FPN',
         in_channels=[192, 384, 768, 1536],
@@ -53,7 +54,7 @@ model = dict(
         stage_loss_weights=[1, 0.5, 0.25],
         bbox_roi_extractor=dict(
             type='SingleRoIExtractor',
-            roi_layer=dict(type='RoIAlign', output_size=7, sampling_ratio=0),
+            roi_layer=dict(type='RoIAlign', output_size=roi_feat_size, sampling_ratio=0),
             out_channels=256,
             featmap_strides=[4, 8, 16, 32]),
         bbox_head=[
@@ -61,7 +62,7 @@ model = dict(
                 type='Shared2FCBBoxHead',
                 in_channels=256,
                 fc_out_channels=1024,
-                roi_feat_size=7,
+                roi_feat_size=roi_feat_size,
                 num_classes=10,
                 bbox_coder=dict(
                     type='DeltaXYWHBBoxCoder',
@@ -71,14 +72,14 @@ model = dict(
                 loss_cls=dict(
                     type='CrossEntropyLoss',
                     use_sigmoid=False,
-                    loss_weight=1.0),
+                    loss_weight=class_loss_weight),
                 loss_bbox=dict(type='SmoothL1Loss', beta=1.0,
-                               loss_weight=1.0)),
+                               loss_weight=bbox_loss_weight)),
             dict(
                 type='Shared2FCBBoxHead',
                 in_channels=256,
                 fc_out_channels=1024,
-                roi_feat_size=7,
+                roi_feat_size=roi_feat_size,
                 num_classes=10,
                 bbox_coder=dict(
                     type='DeltaXYWHBBoxCoder',
@@ -88,14 +89,14 @@ model = dict(
                 loss_cls=dict(
                     type='CrossEntropyLoss',
                     use_sigmoid=False,
-                    loss_weight=1.0),
+                    loss_weight=class_loss_weight),
                 loss_bbox=dict(type='SmoothL1Loss', beta=1.0,
-                               loss_weight=1.0)),
+                               loss_weight=bbox_loss_weight)),
             dict(
                 type='Shared2FCBBoxHead',
                 in_channels=256,
                 fc_out_channels=1024,
-                roi_feat_size=7,
+                roi_feat_size=roi_feat_size,
                 num_classes=10,
                 bbox_coder=dict(
                     type='DeltaXYWHBBoxCoder',
@@ -105,8 +106,8 @@ model = dict(
                 loss_cls=dict(
                     type='CrossEntropyLoss',
                     use_sigmoid=False,
-                    loss_weight=1.0),
-                loss_bbox=dict(type='SmoothL1Loss', beta=1.0, loss_weight=1.0))
+                    loss_weight=class_loss_weight),
+                loss_bbox=dict(type='SmoothL1Loss', beta=1.0, loss_weight=bbox_loss_weight))
         ]),
     train_cfg=dict(
         rpn=dict(
@@ -129,7 +130,7 @@ model = dict(
         rpn_proposal=dict(
             nms_pre=2000,
             max_per_img=2000,
-            nms=dict(type='nms', iou_threshold=0.7),
+            nms=dict(type='nms', iou_threshold=rpn_iou_threshold),
             min_bbox_size=0),
         rcnn=[
             dict(
@@ -274,11 +275,11 @@ test_pipeline = [
 ]
 data = dict(
     samples_per_gpu=2,
-    workers_per_gpu=2,
+    workers_per_gpu=4,
     train=dict(
         type='CocoDataset',
-        ann_file='/opt/ml/detection/dataset/simple_train.json',
-        img_prefix='/opt/ml/detection/dataset/',
+        ann_file='../dataset/train_v3_f2.json',
+        img_prefix='../dataset/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations', with_bbox=True, with_mask=False),
@@ -289,9 +290,9 @@ data = dict(
                     'type':
                     'Resize',
                     'img_scale': [(614, 1024), (655, 1024), (696, 1024),
-                                  (1024, 1024), (737, 1024), (778, 1024),
-                                  (819, 1024), (983, 1024), (860, 1024),
-                                  (901, 1024), (942, 1024)],
+                                  (737, 1024), (778, 1024), (819, 1024),
+                                  (860, 1024), (901, 1024), (942, 1024),
+                                  (983, 1024), (1024, 1024)],
                     'multiscale_mode':
                     'value',
                     'keep_ratio':
@@ -312,11 +313,11 @@ data = dict(
                               'type':
                               'Resize',
                               'img_scale': [(614, 1024), (655, 1024),
-                                            (696, 1024), (1024, 1024),
-                                            (737, 1024), (778, 1024),
-                                            (819, 1024), (983, 1024),
+                                            (696, 1024), (737, 1024),
+                                            (778, 1024), (819, 1024),
                                             (860, 1024), (901, 1024),
-                                            (942, 1024)],
+                                            (942, 1024), (983, 1024),
+                                            (1024, 1024)],
                               'multiscale_mode':
                               'value',
                               'override':
@@ -335,13 +336,14 @@ data = dict(
             dict(type='DefaultFormatBundle'),
             dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
         ],
-        classes=('General trash', 'Paper', 'Paper pack', 'Metal', 'Glass',
-                 'Plastic', 'Styrofoam', 'Plastic bag', 'Battery',
-                 'Clothing')),
+        classes=[
+            'General trash', 'Paper', 'Paper pack', 'Metal', 'Glass',
+            'Plastic', 'Styrofoam', 'Plastic bag', 'Battery', 'Clothing'
+        ]),
     val=dict(
         type='CocoDataset',
-        ann_file='/opt/ml/detection/dataset/simple_valid.json',
-        img_prefix='/opt/ml/detection/dataset/',
+        ann_file='../dataset/valid_v3_f2.json',
+        img_prefix='../dataset/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -367,13 +369,14 @@ data = dict(
                     dict(type='Collect', keys=['img'])
                 ])
         ],
-        classes=('General trash', 'Paper', 'Paper pack', 'Metal', 'Glass',
-                 'Plastic', 'Styrofoam', 'Plastic bag', 'Battery',
-                 'Clothing')),
+        classes=[
+            'General trash', 'Paper', 'Paper pack', 'Metal', 'Glass',
+            'Plastic', 'Styrofoam', 'Plastic bag', 'Battery', 'Clothing'
+        ]),
     test=dict(
         type='CocoDataset',
-        ann_file='/opt/ml/detection/dataset/test.json',
-        img_prefix='/opt/ml/detection/dataset/',
+        ann_file='../dataset/test.json',
+        img_prefix='../dataset/',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -399,42 +402,31 @@ data = dict(
                     dict(type='Collect', keys=['img'])
                 ])
         ],
-        classes=('General trash', 'Paper', 'Paper pack', 'Metal', 'Glass',
-                 'Plastic', 'Styrofoam', 'Plastic bag', 'Battery',
-                 'Clothing')))
-evaluation = dict(interval=1, metric='bbox', save_best='bbox_mAP_50')
-checkpoint_config = dict(max_keep_ckpts=-1, interval=1)
+        classes=[
+            'General trash', 'Paper', 'Paper pack', 'Metal', 'Glass',
+            'Plastic', 'Styrofoam', 'Plastic bag', 'Battery', 'Clothing'
+        ]))
+evaluation = dict(interval=1, metric='bbox')
+checkpoint_config = dict(interval=6)
 log_config = dict(
-    interval=100,
+    interval=1000,
+    by_epoch=True,
     hooks=[
         dict(type='TextLoggerHook'),
-        dict(
-            type='WandbLoggerHook',
-            init_kwargs=dict(
-                project='mmdetection',
-                name='swin_t_squeeze_2_multi_0.0063_[1, 2]'))
     ])
 custom_hooks = [dict(type='NumClassCheckHook')]
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 load_from = None
 resume_from = None
-workflow = [('train', 1), ('val', 1)]
-optimizer = dict(
-    type='SGD',
-    lr=0.0062688257479603555,
-    momentum=0.9,
-    weight_decay=0.004450673871911461)
-optimizer_config = dict(
-    grad_clip=dict(max_norm=25.151008913067777, norm_type=2))
+workflow = [('train', 1),('val',1)]
+optimizer = dict(type='SGD', lr=0.002, momentum=0.9, weight_decay=0.0001)
+optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
 lr_config = dict(
     policy='step',
     warmup='linear',
     warmup_iters=1000,
     warmup_ratio=0.001,
-    step=[1, 2])
-runner = dict(type='EpochBasedRunner', max_epochs=2)
+    step=[15])
+runner = dict(type='EpochBasedRunner', max_epochs=30)
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_large_patch4_window12_384_22k.pth'
-gpu_ids = [0]
-seed = 16
-work_dir = './work-dir/swin_t_squeeze_2_multi_0.0063_[1, 2]'

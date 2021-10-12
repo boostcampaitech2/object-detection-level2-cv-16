@@ -406,10 +406,11 @@ data = dict(
             'General trash', 'Paper', 'Paper pack', 'Metal', 'Glass',
             'Plastic', 'Styrofoam', 'Plastic bag', 'Battery', 'Clothing'
         ]))
-evaluation = dict(interval=1, metric='bbox', save_best='bbox_mAP_50')
-checkpoint_config = dict(interval=1)
+evaluation = dict(interval=1, metric='bbox')
+checkpoint_config = dict(interval=6)
 log_config = dict(
-    interval=100,
+    interval=1000,
+    by_epoch=True,
     hooks=[
         dict(type='TextLoggerHook'),
     ])
