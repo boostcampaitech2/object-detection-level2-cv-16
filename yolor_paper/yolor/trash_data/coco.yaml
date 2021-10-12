@@ -1,0 +1,10 @@
+# train and val datasets (image directory or *.txt file with image paths)
+train: /opt/ml/detection/yolor_paper/yolor/trash_data/images/train  # 118k images
+val: /opt/ml/detection/yolor_paper/yolor/trash_data/images/valid 
+test: /opt/ml/detection/yolor_paper/yolor/trash_data/images/test  
+
+# number of classes
+nc: 10
+
+# class names
+names: [ 'General trash', 'Paper', 'Paper pack', 'Metal', 'Glass', 'Plastic', 'Styrofoam', 'Plastic bag', 'Battery', 'Clothing']
