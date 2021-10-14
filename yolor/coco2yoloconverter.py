@@ -70,17 +70,15 @@ class CustomDataset(Dataset):
     
 if __name__ == '__main__':
     data_dir = './dataset'
+    
     annotation = data_dir + '/train_v3_f3.json'
-
     temp = CustomDataset(annotation, data_dir, 'train')
     
     # annotation = data_dir + '/valid_v3_f3.json'
-
     # temp = CustomDataset(annotation, data_dir, 'valid')
 
     #annotation = data_dir + '/test.json'
-
     #temp = CustomDataset(annotation, data_dir, 'test')
+    
     for i in range(len(temp)):
         print(temp[i])
-    

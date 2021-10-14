@@ -4,9 +4,9 @@ import pandas as pd
 
 def adjust_size(tmp):
     if int(tmp) == 0:
-        tmp = 0
+        tmp = 0.0
     elif int(tmp) == 1024:
-        tmp = 1024
+        tmp = 1024.0
     return tmp
 
 def main():
