@@ -1,5 +1,4 @@
 # Passion-ate Object Detection
----
 
 # 프로젝트 개요
 - 우리는 많은 물건이 대량으로 생산되고, 소비되는 시대를 살고 있습니다. 하지만 이러한 문화는 '쓰레기 대란', '매립지 부족'과 같은 여러 사회 문제를 낳고 있습니다.
@@ -38,3 +37,10 @@
     - `python detect.py --source trash_data/images/test --weights runs/train/yolor-d6/weights/best.pt --conf 0.001 --iou 0.5 --img-size 1024 --device 0 --save-txt --save-conf --project runs/yolor-d6`
 - Evaluation
     - `python yolor_make_submission.py`
+  
+@article{wang2021you,
+  title={You Only Learn One Representation: Unified Network for Multiple Tasks},
+  author={Wang, Chien-Yao and Yeh, I-Hau and Liao, Hong-Yuan Mark},
+  journal={arXiv preprint arXiv:2105.04206},
+  year={2021}
+}
