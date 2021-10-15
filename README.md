@@ -28,8 +28,8 @@
 ### Yolor
 - Train
     - `python train.py --data trash_data/coco.yaml --cfg models/yolor-d6.yaml --weights './yolor-d6.pt' --device 0 --name yolor-d6 --hyp trash_data/hyp.yaml`
-- Test
-    - `python detect.py --source trash_data/images/test --weights runs/train/yolor-d6/weights/best.pt --conf 0.001 --iou 0.5 --img-size 1024 --device 0 --save-txt --save-conf --project runs/yolor-d6`
 - Inference
+    - `python detect.py --source trash_data/images/test --weights runs/train/yolor-d6/weights/best.pt --conf 0.001 --iou 0.5 --img-size 1024 --device 0 --save-txt --save-conf --project runs/yolor-d6`
+- Evaluation
     - `python yolor_make_submission.py`
 
