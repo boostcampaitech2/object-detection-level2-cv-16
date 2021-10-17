@@ -12,7 +12,6 @@
 ---
 # Result
 - private LB : 0.666 (6등)
-- public LB : 0.680 (7등)
 ---
 # How to Use
 <br>
@@ -53,7 +52,7 @@
 }
 ```
 <br>
-## Error Analysis
+## PR curve Analysis
 - json
     - `python tools/test.py ${CONFIG} ${CHECKPOINT_DIR} --format-only --options "jsonfile_prefix=./${FILE NAME}"`
 - coco analysis
