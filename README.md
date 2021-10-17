@@ -40,7 +40,8 @@
     - `python yolor/detect.py --source yolor/trash_data/images/test --weights yolor/runs/train/yolor-d6/weights/best.pt --conf 0.001 --iou 0.5 --img-size 1024 --device 0 --save-txt --save-conf --project yolor/runs/yolor-d6`
 - Evaluation
     - `python yolor/yolor_make_submission.py`
-##Error Analysis
+
+## Error Analysis
 - json
     - `python tools/test.py ${CONFIG} ${CHECKPOINT_DIR} --format-only --options "jsonfile_prefix=./${FILE NAME}"`
 - coco analysis
