@@ -32,11 +32,11 @@
 - Evaluation
 ### Yolor
 - Train
-    - `python train.py --data trash_data/coco.yaml --cfg models/yolor-d6.yaml --weights './yolor-d6.pt' --device 0 --name yolor-d6 --hyp trash_data/hyp.yaml`
+    - `python yolor/train.py --data yolor/trash_data/coco.yaml --cfg yolor/models/yolor-d6.yaml --weights 'yolor/yolor-d6.pt' --device 0 --name yolor-d6 --hyp trash_data/hyp.yaml`
 - Inference
-    - `python detect.py --source trash_data/images/test --weights runs/train/yolor-d6/weights/best.pt --conf 0.001 --iou 0.5 --img-size 1024 --device 0 --save-txt --save-conf --project runs/yolor-d6`
+    - `python yolor/detect.py --source yolor/trash_data/images/test --weights yolor/runs/train/yolor-d6/weights/best.pt --conf 0.001 --iou 0.5 --img-size 1024 --device 0 --save-txt --save-conf --project yolor/runs/yolor-d6`
 - Evaluation
-    - `python yolor_make_submission.py`
+    - `python yolor/yolor_make_submission.py`
   
 @article{wang2021you,
   title={You Only Learn One Representation: Unified Network for Multiple Tasks},
