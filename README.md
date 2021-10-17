@@ -33,14 +33,14 @@
     - `python mmdetection/tools/test.py ${config} ${model} --out mmdetection/work_dirs/final/latest.pkl`
 - Evaluation
     - `python mmdetection/make_submission.py --pkl mmdetection/work_dirs/latest.pkl --csv mmdetection/work_dirs/result.csv`
-
+```
 @article{liu2021Swin,
   title={Swin Transformer: Hierarchical Vision Transformer using Shifted Windows},
   author={Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
   journal={arXiv preprint arXiv:2103.14030},
   year={2021}
 }
-
+```
 ### Yolor
 - Train
     - `python yolor/train.py --data yolor/trash_data/coco.yaml --cfg yolor/models/yolor-d6.yaml --weights 'yolor/yolor-d6.pt' --device 0 --name yolor-d6 --hyp trash_data/hyp.yaml`
@@ -48,10 +48,11 @@
     - `python yolor/detect.py --source yolor/trash_data/images/test --weights yolor/runs/train/yolor-d6/weights/best.pt --conf 0.001 --iou 0.5 --img-size 1024 --device 0 --save-txt --save-conf --project yolor/runs/yolor-d6`
 - Evaluation
     - `python yolor/yolor_make_submission.py`
-  
+```
 @article{wang2021you,
   title={You Only Learn One Representation: Unified Network for Multiple Tasks},
   author={Wang, Chien-Yao and Yeh, I-Hau and Liao, Hong-Yuan Mark},
   journal={arXiv preprint arXiv:2105.04206},
   year={2021}
 }
+```
