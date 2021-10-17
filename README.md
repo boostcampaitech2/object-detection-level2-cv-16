@@ -16,12 +16,7 @@
 ---
 # How to Use
 
-```
-├── mmddetection
-├── README.md
-├── yolor
-```
-## 필수 설치
+## Installation
 
 - `pip install -r requirements.txt`
 
