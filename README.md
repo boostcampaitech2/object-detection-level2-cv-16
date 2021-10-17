@@ -30,8 +30,9 @@
 - Train
     - `python mmdetection/tools/train.py {CONFIG_PATH}`
 - Inference
-    - `python mmdetection/tools/test.py`
+    - `python mmdetection/tools/test.py ${config} ${model} --out mmdetection/work_dirs/final/latest.pkl`
 - Evaluation
+    - `python mmdetection/make_submissiohn.py --pkl mmdetection/work_dirs/final/latest.pkl --csv mmdetection/work_dirs/result.csv`
 ### Yolor
 - Train
     - `python yolor/train.py --data yolor/trash_data/coco.yaml --cfg yolor/models/yolor-d6.yaml --weights 'yolor/yolor-d6.pt' --device 0 --name yolor-d6 --hyp trash_data/hyp.yaml`
