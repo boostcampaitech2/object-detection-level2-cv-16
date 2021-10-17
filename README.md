@@ -1,5 +1,4 @@
 # Passion-ate Object Detection
-<br>
 # Overview
 - 우리는 많은 물건이 대량으로 생산되고, 소비되는 시대를 살고 있습니다. 하지만 이러한 문화는 '쓰레기 대란', '매립지 부족'과 같은 여러 사회 문제를 낳고 있습니다.
 - 분리수거는 이러한 환경 부담을 줄일 수 있는 방법 중 하나입니다. 잘 분리배출 된 쓰레기는 자원으로서 가치를 인정받아 재활용되지만, 잘못 분리배출 되면 그대로 폐기물로 분류되어 매립 또는 소각되기 때문입니다.
@@ -14,7 +13,7 @@
 - private LB : 0.666 (6등)
 ---
 # How to Use
-<br>
+
 ## Installation
 
 - `pip install -r requirements.txt`
@@ -35,7 +34,7 @@
   year={2021}
 }
 ```
-<br>
+
 ### Yolor
 - Train
     - `python yolor/train.py --data yolor/trash_data/coco.yaml --cfg yolor/models/yolor-d6.yaml --weights 'yolor/yolor-d6.pt' --device 0 --name yolor-d6 --hyp trash_data/hyp.yaml`
@@ -51,7 +50,7 @@
   year={2021}
 }
 ```
-<br>
+
 ## PR curve Analysis
 - json
     - `python tools/test.py ${CONFIG} ${CHECKPOINT_DIR} --format-only --options "jsonfile_prefix=./${FILE NAME}"`
