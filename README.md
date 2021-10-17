@@ -28,7 +28,9 @@
 ## Model
 ### Swin
 - Train
+    - `python mmdetection/tools/train.py {CONFIG_PATH}`
 - Inference
+    - `python mmdetection/tools/test.py`
 - Evaluation
 ### Yolor
 - Train
