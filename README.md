@@ -1,15 +1,15 @@
-# Passion-ate Object Detection
+# Passion-ate🔥
+| [강재현](https://github.com/AshHyun) | [김민준](https://github.com/danny0628) | [박상현](https://github.com/hyun06000) | [서광채](https://github.com/Gwang-chae) | [오하은](https://github.com/Haeun-Oh) | [이승우](https://github.com/DaleLeeCoding) |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| ![image](https://user-images.githubusercontent.com/65941859/137628452-e2f573fe-0143-46b1-925d-bc58b2317474.png) | ![image](https://user-images.githubusercontent.com/65941859/137628521-10453cac-ca96-4df8-8ca0-b5b0d00930c0.png) | ![image](https://user-images.githubusercontent.com/65941859/137628500-342394c3-3bbe-4905-984b-48fae5fc75d6.png) | ![image](https://user-images.githubusercontent.com/65941859/137628535-9afd4035-8014-475c-899e-77304950c190.png) | ![image](https://user-images.githubusercontent.com/65941859/137628474-e9c4ab46-0a51-4a66-9109-7462d3a7ead1.png) | ![image](https://user-images.githubusercontent.com/65941859/137628443-c032259e-7a7a-4c2d-891a-7db09b42d27b.png) |
+| [Notion](https://www.notion.so/Sunny-1349e293c9f74de092dce9ee359bd77c) | [Notion](https://www.notion.so/AI-Research-Engineer-6f6537a7675542be901a3499e71140f9) | [Notion](https://www.notion.so/Boostcamp-deef2c0783f24c0b8022ba30b5782986) | [Notion](https://www.ohsuz.dev/) | [Notion](https://www.notion.so/thinkwisely/Naver-Boost-Camp-AI-Tech-ba743126e68749d58bdbb7af0580c8ee) |   |
+
 # Overview
 ![overview](https://user-images.githubusercontent.com/65941859/137625407-68686b0c-fe72-430e-8b2b-e52701bdd0f7.PNG)
 
 # Project Structure
 ![인포](https://user-images.githubusercontent.com/65941859/137625355-0b2a647c-7680-4d6c-9e2e-d718989ca8ef.PNG)
 
-| [강재현](https://github.com/sunnight9507) | [김민준](https://github.com/JaeheeRyu) | [박상현](https://github.com/PJHgh) | [서광채](https://github.com/ohsuz) | [오하은](https://github.com/LeeHyeonKyu) | [이승우](https://github.com/dlrgy22) |
-| :-: | :-: | :-: | :-: | :-: | :-: |
-| ![image](https://user-images.githubusercontent.com/59340911/119260030-eeae6200-bc0b-11eb-92e3-23e69ba35984.png) | ![image](https://user-images.githubusercontent.com/59340911/119260176-8f9d1d00-bc0c-11eb-9a7b-32a33c1a1072.png) | ![image](https://user-images.githubusercontent.com/59340911/119385801-a07b8a80-bd01-11eb-83c4-f3647bdd131a.png) | ![image](https://user-images.githubusercontent.com/59340911/119385429-13d0cc80-bd01-11eb-8855-8c57cdaaafc6.png) | ![image](https://user-images.githubusercontent.com/72373733/122941284-37467000-d3b0-11eb-8764-f6c7b4bed4d2.png) | ![image](https://user-images.githubusercontent.com/59340911/119260159-84e28800-bc0c-11eb-8164-6810a92bff38.png) |
-| [Notion](https://www.notion.so/Sunny-1349e293c9f74de092dce9ee359bd77c) | [Notion](https://www.notion.so/AI-Research-Engineer-6f6537a7675542be901a3499e71140f9) | [Notion](https://www.notion.so/Boostcamp-deef2c0783f24c0b8022ba30b5782986) | [Notion](https://www.ohsuz.dev/) | [Notion](https://www.notion.so/thinkwisely/Naver-Boost-Camp-AI-Tech-ba743126e68749d58bdbb7af0580c8ee) |   |
-| ENFJ | ISTP | INTJ | ENTP | ESTJ | INFP |
 ---
 # Result
 - private LB : 0.666 (6등)
