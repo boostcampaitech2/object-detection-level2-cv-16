@@ -33,6 +33,14 @@
     - `python mmdetection/tools/test.py ${config} ${model} --out mmdetection/work_dirs/latest.pkl`
 - Evaluation
     - `python mmdetection/make_submission.py --pkl mmdetection/work_dirs/latest.pkl --csv mmdetection/work_dirs/result.csv`
+```
+@article{liu2021Swin,
+  title={Swin Transformer: Hierarchical Vision Transformer using Shifted Windows},
+  author={Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
+  journal={arXiv preprint arXiv:2103.14030},
+  year={2021}
+}
+```
 ### Yolor
 - Train
     - `python yolor/train.py --data yolor/trash_data/coco.yaml --cfg yolor/models/yolor-d6.yaml --weights 'yolor/yolor-d6.pt' --device 0 --name yolor-d6 --hyp trash_data/hyp.yaml`
