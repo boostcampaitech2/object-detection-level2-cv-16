@@ -5,6 +5,10 @@ mmdetection/demo
 dataset/test/*
 dataset/train/*
 dataset/result/*
+/**/wandb/
+/**/*.out
+/**/*.log
+/**/*.csv
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
