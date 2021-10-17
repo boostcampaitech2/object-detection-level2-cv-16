@@ -8,6 +8,8 @@
 ---
 # Result
 - private LB : 0.666 (6등)
+
+![leaderboard](https://user-images.githubusercontent.com/65941859/137625481-fb8a113c-4d21-404d-a4c6-588dc75307fe.png)
 ---
 # How to Use
 
